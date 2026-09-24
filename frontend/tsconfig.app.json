@@ -1,0 +1,73 @@
+{
+  "compilerOptions": {
+    /* Stores incremental build informaiton */
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    /* JavaScript version to compile against */
+    "target": "es2023",
+
+    /* Available APIs and global types */
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+
+    /* Use Modern ES modules */
+    "module": "esnext",
+
+    /* Recommended for vite and modern bundlers */
+    "moduleResolution": "bundler",
+
+    /* React 17+ automatic JSX transform */
+    "jsx": "react-jsx",
+
+    /* Provides vite-specific types */
+    "types": ["vite/client"],
+
+    /* Enable all strict type-checking options */
+    "strict": true,
+
+    /* Helps to inports TS files */
+    "allowImportingTsExtensions": true,
+
+    /* Preserve import/export syntax exactly as written */
+    "verbatimModuleSyntax": true,
+
+    /* Treat files as modules when imports/exports exist
+    "moduleDetection": "force",
+
+    /* Used only for type checking and error detection, not for building output */
+    "noEmit": true,
+
+    /* Skip checking declaration files in node_modules */
+    "skipLibCheck": true,
+
+    /* Error if a local veriable is never used */
+    "noUnusedLocals": true,
+    
+    /* Error if a function parameter never used */
+    "noUnusedParameters": true,
+
+    /* Prevent accidental switch fallthrough */
+    "noFallthroughCasesInSwitch": true,
+
+    /* Safer array/object indexing */
+    "noUncheckedIndexedAccess": true,
+
+    /* Makes optional properties behave more accurately */
+    "exactOptionalPropertyTypes": true,
+
+    /* Base path for path aliases; going to outdated */
+    "baseUrl": ".",
+
+    /* GOing to outdated */
+    "ignoreDeprecations": "6.0",
+
+    /* Import aliases Example: import button from "@app.components/Button"; going to outdated*/
+    "paths": {
+      "@app/*": ["src/app/*"]
+    },
+  },
+  /* Files/folders TS should compile */
+  "include": ["src"],
+
+  /* Files/folders TS should ignore */
+  "exclude": ["node_modules", "dist"]
+}
