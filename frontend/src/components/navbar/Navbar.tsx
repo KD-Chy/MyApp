@@ -98,8 +98,6 @@ export default function HomePage() {
                 | Navbar
                 ================================================================= */}
 
-            {/* <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-md"> */}
-
             <nav
                 className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
                 aria-label="Main navigation"
@@ -109,38 +107,11 @@ export default function HomePage() {
                     | Home logo
                     --------------------------------------------------------- */}
 
-                {/* <Link
-                    to="/"
-                    onClick={handleHomeClick}
-                    className="flex items-center gap-3"
-                    aria-label={`${SITE_NAME} home`}
-                > */}
-                {/* <button
-                    type="button"
-                    onClick={handleHomeClick}
-                    className="flex gap-3" //items-center removed
-                    aria-label={`${SITE_NAME} home`}
-                >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-white shadow-sm">
-                        <FaHome className="text-lg" />
-                    </div>
-
-                    <div>
-                        <span className="block text-lg font-bold tracking-tight text-gray-900 text-left">
-                            {SITE_NAME}
-                        </span>
-
-                        <span className="hidden text-xs text-gray-500 sm:block">
-                            Smart. Secure. Simple.
-                        </span>
-                    </div>
-                </button> */}
-
                 <HomeLogo />
 
                 {/* --------------------------------------------------------
-                          Desktop navigation
-                        --------------------------------------------------------- */}
+                    | Desktop navigation
+                    --------------------------------------------------------- */}
 
                 <div className="hidden items-center gap-1 lg:flex">
 
