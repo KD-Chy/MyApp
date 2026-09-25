@@ -6,7 +6,7 @@ import RoleProtectedRoute from "./RoleProtectedRoute";
 
 const HomePage = lazy(
     () => import("../pages/homepage/HomePage")
-)
+);
 
 const SignupForm = lazy(
     () => import("../components/forms/SignupForm")
@@ -41,8 +41,8 @@ const UserDashboard = lazy(
 );
 
 const Navbar = lazy(
-    () => import("../pages/homepage/Navbar")
-)
+    () => import("../components/navbar/Navbar")
+);
 
 export default function AppRoutes() {
     return (
