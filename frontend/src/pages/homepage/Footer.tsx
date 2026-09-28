@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
 import{
-    FaHome,
+    FaHouse,
     FaLinkedin,
     FaGithub,
     FaTwitter,
-} from "react-icons/fa";
+} from "react-icons/fa6";
 
 import { SITE_NAME } from "../../constraint/constraints";
 
@@ -31,7 +31,7 @@ export default function Footer() {
                                 className="inline-flex items-center gap-3 text-white"
                             >
                                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-gray-950">
-                                    <FaHome />
+                                    <FaHouse />
                                 </div>
 
                                 <span className="text-xl font-bold">
@@ -50,7 +50,11 @@ export default function Footer() {
                             <div className="mt-6 flex gap-3">
 
                                 <a
-                                    href="#"
+                                    href="https://www.github.com/KD-Chy"
+                                    target="_blank"
+                                    
+                                    // Security or best-practice when using _blank
+                                    rel="noopener noreferrer"
                                     aria-label="GitHub"
                                     className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-gray-400 transition hover:bg-white/10 hover:text-white"
                                 >
@@ -58,7 +62,9 @@ export default function Footer() {
                                 </a>
 
                                 <a
-                                    href="#"
+                                    href="https://www.linkedin.com/in/kd-chy-809108295"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     aria-label="LinkedIn"
                                     className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-gray-400 transition hover:bg-white/10 hover:text-white"
                                 >

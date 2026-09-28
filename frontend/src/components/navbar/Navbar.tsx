@@ -1,47 +1,35 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
     FaBars,
-    FaTimes,
-    FaHome,
-    FaInfoCircle,
+    FaXmark,
+    FaHouse,
+    FaCircleInfo,
     FaEnvelope,
-    FaSearch,
+    FaMagnifyingGlass,
     FaUserPlus,
-    FaSignInAlt,
+    FaRightToBracket,
+} from "react-icons/fa6";
 
-} from "react-icons/fa";
-
-import { SITE_NAME } from "../../constraint/constraints";
 import HomeLogo from "./HomeLogo";
 
 /*
-|--------------------------------------------------------------------------
-| Website configuration
-|--------------------------------------------------------------------------
-| Keep the main branding information in one place.
-| When you decide the final website name, change it here.
-|--------------------------------------------------------------------------
-*/
-
-{ SITE_NAME }
-
-/*
-|--------------------------------------------------------------------------
+|-------------------------
 | Navigation items
-|--------------------------------------------------------------------------
+|-------------------------
 */
 
 const navigationItems = [
     {
         label: "Home",
         href: "#home",
-        icon: FaHome,
+        icon: FaHouse,
     },
     {
         label: "About Us",
         href: "#about",
-        icon: FaInfoCircle,
+        icon: FaCircleInfo,
     },
     {
         label: "Contact Us",
@@ -50,15 +38,15 @@ const navigationItems = [
     },
 ];
 
-export default function HomePage() {
+export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
     /*
-    |--------------------------------------------------------------------------
+    |--------------------------
     | Close mobile menu
-    |--------------------------------------------------------------------------
+    |--------------------------
     */
 
     const closeMobileMenu = () => {
@@ -66,9 +54,9 @@ export default function HomePage() {
     };
 
     /*
-    |--------------------------------------------------------------------------
+    |---------------------------
     | Search handler
-    |--------------------------------------------------------------------------
+    |---------------------------
     */
 
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
@@ -81,12 +69,12 @@ export default function HomePage() {
         }
 
         /*
-        |--------------------------------------------------------------------------
+        |------------------------------------------------------
         | Search functionality can be connected later.
         |
         | For now, this keeps the UI ready without pretending
         | that a search backend already exists.
-        |--------------------------------------------------------------------------
+        |------------------------------------------------------
         */
 
         console.log("Search query:", query);
@@ -149,7 +137,7 @@ export default function HomePage() {
                             aria-label="Open search"
                             aria-expanded={searchOpen}
                         >
-                            <FaSearch />
+                            <FaMagnifyingGlass />
                         </button>
 
                         {searchOpen && (
@@ -157,7 +145,7 @@ export default function HomePage() {
                                 onSubmit={handleSearch}
                                 className="absolute right-0 top-12 flex w-72 items-center gap-2 rounded-xl border border-gray-200 bg-white p-2 shadow-xl"
                             >
-                                <FaSearch className="ml-2 text-sm text-gray-400" />
+                                <FaMagnifyingGlass className="ml-2 text-sm text-gray-400" />
 
                                 <input
                                     type="search"
@@ -188,7 +176,7 @@ export default function HomePage() {
                         to="/login"
                         className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
                     >
-                        <FaSignInAlt />
+                        <FaRightToBracket />
                         <span>Login</span>
                     </Link>
 
@@ -205,8 +193,8 @@ export default function HomePage() {
                 </div>
 
                 {/* --------------------------------------------------------
-                          Mobile menu button
-                        --------------------------------------------------------- */}
+                      Mobile menu button
+                    -------------------------------------------------------- */}
 
                 <button
                     type="button"
@@ -221,14 +209,14 @@ export default function HomePage() {
                     }
                     aria-expanded={mobileMenuOpen}
                 >
-                    {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+                    {mobileMenuOpen ? <FaXmark /> : <FaBars />}
                 </button>
 
             </nav>
 
             {/* ============================================================
-                      MOBILE NAVIGATION
-                    ============================================================= */}
+                  MOBILE NAVIGATION
+                ============================================================ */}
 
             {mobileMenuOpen && (
                 <div className="border-t border-gray-200 bg-white lg:hidden">
@@ -263,7 +251,7 @@ export default function HomePage() {
                             onSubmit={handleSearch}
                             className="mb-3 flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2"
                         >
-                            <FaSearch className="text-sm text-gray-400" />
+                            <FaMagnifyingGlass className="text-sm text-gray-400" />
 
                             <input
                                 type="search"
@@ -293,7 +281,7 @@ export default function HomePage() {
                                     onClick={closeMobileMenu}
                                     className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
                                 >
-                                    <FaSignInAlt />
+                                    <FaRightToBracket />
                                     Login
                                 </Link>
                             </div>
