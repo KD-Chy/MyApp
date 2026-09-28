@@ -1,6 +1,6 @@
 import { SITE_NAME } from "../../constraint/constraints";
 
-import { FaHome } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
 
 export default function HomeLogo() {
     /*
@@ -20,7 +20,7 @@ export default function HomeLogo() {
         <div>
             {/* --------------------------------------------------------
                 | Home logo
-                --------------------------------------------------------- */}
+                -------------------------------------------------------- */}
 
             <button
                 type="button"
@@ -29,7 +29,7 @@ export default function HomeLogo() {
                 aria-label={`${SITE_NAME} home`}
             >
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-white shadow-sm">
-                    <FaHome className="text-lg" />
+                    <FaHouse className="text-lg" />
                 </div>
 
                 <div>
