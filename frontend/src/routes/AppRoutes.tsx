@@ -5,11 +5,11 @@ import ProtectedRoute from "./ProtectedRoutes";
 import RoleProtectedRoute from "./RoleProtectedRoute";
 
 const HomePage = lazy(
-    () => import("../pages/homepage/HomePage")
+    () => import("@/pages/homepage/HomePage")
 );
 
 const SignupForm = lazy(
-    () => import("../components/forms/SignupForm")
+    () => import("@/components/forms/SignupForm")
 );
 
 const LoginPage = lazy(
@@ -17,7 +17,7 @@ const LoginPage = lazy(
 );
 
 const LoginForm = lazy(
-    () => import("../components/forms/LoginForm")
+    () => import("@/components/forms/LoginForm")
 );
 
 const SignupPage = lazy(
@@ -29,19 +29,19 @@ const ForgotPassword = lazy(
 );
 
 const SuperAdminDashboard = lazy(
-    () => import("../pages/dashboard/SuperAdminDashboard")
+    () => import("@/pages/dashboard/SuperAdminDashboard")
 );
 
 const AdminDashboard = lazy(
-    () => import("../pages/dashboard/AdminDashboard")
+    () => import("@/pages/dashboard/AdminDashboard")
 );
 
 const UserDashboard = lazy(
-    () => import("../pages/dashboard/UserDashboard")
+    () => import("@/pages/dashboard/UserDashboard")
 );
 
 const Navbar = lazy(
-    () => import("../components/navbar/Navbar")
+    () => import("@/components/navbar/Navbar")
 );
 
 export default function AppRoutes() {

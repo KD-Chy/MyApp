@@ -13,7 +13,7 @@ import { SITE_NAME } from "@/constraint/constraints";
 
 export default function HeroSection() {
     return (
-        <div>
+        <div className="bg-primary">
             {/* ============================================================
                 | HERO SECTION
                 ============================================================ */}
@@ -52,7 +52,7 @@ export default function HeroSection() {
                                 to="/signup"
                                 className="group inline-flex items-center justify-center gap-2 rounded-lg bg-gray-900 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-700"
                             >
-                                Get Started
+                                Let's Work Together
                                 <FaArrowRight className="transition-transform group-hover:translate-x-1" />
                             </Link>
 

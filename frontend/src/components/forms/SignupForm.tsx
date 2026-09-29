@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from "react";
-import type { SignupFormData, SignupErrors } from "../../types/auth";
-import { signup } from "../../services/authservice";
-import { validateSignup } from "../../utils/validators";
+import type { SignupFormData, SignupErrors } from "@/types/auth";
+import { signup } from "@/services/authservice";
+import { validateSignup } from "@/utils/validators";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Checkbox from '../inputs/Checkbox';
@@ -115,7 +115,7 @@ export default function SignupForm() {
 
                 {/* Display server error */}
                 {isSignupError && (
-                    <div className="mt-4 w-full rounded-md bg-red-100 px-3 py-2 text-sm text-red-700 justify-center break-words">
+                    <div className="mt-4 w-full rounded-md bg-red-100 px-3 py-2 text-sm text-red-700 justify-center wrap-break-word">
                         {isSignupError}
                     </div>
                 )}
