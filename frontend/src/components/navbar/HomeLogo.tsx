@@ -25,7 +25,7 @@ export default function HomeLogo() {
             <button
                 type="button"
                 onClick={handleHomeClick}
-                className="flex items-center gap-3" //items-center removed
+                className="flex items-center gap-3 cursor-pointer" //items-center removed
                 aria-label={`${SITE_NAME} home`}
             >
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-white shadow-sm">

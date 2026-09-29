@@ -1,8 +1,9 @@
 import Navbar from "../../components/navbar/Navbar";
-import MainSection from "./MainSection";
+import HeroSection from "./HeroSection";
 import ContactSection from "./ContactSection";
-import Footer from "./Footer";
 import AboutSection from "./AboutSection";
+import Footer from "./Footer";
+import FeaturesSection from "./FeaturesSection";
 
 export default function HomePage() {
     return (
@@ -15,29 +16,43 @@ export default function HomePage() {
                 <Navbar />
             </header>
 
+
             {/* ================================================================
                 | MAIN CONTENT
                 ================================================================ */}
 
-            <MainSection />
+            <main>
 
-            {/* ============================================================
-                    ABOUT US SECTION
-                ============================================================ */}
+                {/* ============================================================
+                    | HERO SECTION
+                    ============================================================ */}
 
-            <AboutSection />
+                <HeroSection />
 
-            {/* ============================================================
-                | CONTACT SECTION
-                ============================================================ */}
+                {/* ============================================================
+                    | FEATURES SECTION
+                    ============================================================ */}
 
-            <ContactSection />
+                <FeaturesSection />
+
+                {/* ============================================================
+                    | ABOUT US SECTION
+                    ============================================================ */}
+
+                <AboutSection />
+
+                {/* ============================================================
+                    | CONTACT SECTION
+                    ============================================================ */}
+
+                <ContactSection />
+
+            </main>
 
             {/* ================================================================
                 | FOOTER
                 ================================================================ */}
             <Footer />
-
 
         </div>
     );
