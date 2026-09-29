@@ -84,133 +84,137 @@ export default function Navbar() {
         <div>
             {/* ================================================================
                 | Navbar
-                ================================================================= */}
-
+                ================================================================ */}
             <nav
-                className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+                className="absolute left-0 top-0 z-50 w-full bg-primary"
                 aria-label="Main navigation"
             >
+                <div
+                    className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+                    aria-label="Main navigation"
+                >
 
-                {/* --------------------------------------------------------
+                    {/* --------------------------------------------------------
                     | Home logo
                     --------------------------------------------------------- */}
 
-                <HomeLogo />
+                    <HomeLogo />
 
-                {/* --------------------------------------------------------
+                    {/* --------------------------------------------------------
                     | Desktop navigation
                     --------------------------------------------------------- */}
 
-                <div className="hidden items-center gap-1 lg:flex">
+                    <div className="hidden items-center gap-1 lg:flex">
 
-                    {navigationItems.map((item) => {
-                        const Icon = item.icon;
+                        {navigationItems.map((item) => {
+                            const Icon = item.icon;
 
-                        return (
-                            <a
-                                key={item.label}
-                                href={item.href}
-                                className="group flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
-                            >
-                                <Icon className="text-sm transition group-hover:scale-105" />
-                                <span>{item.label}</span>
-                            </a>
-                        );
-                    })}
-
-                </div>
-
-                {/* --------------------------------------------------------
-                          Desktop right-side actions
-                        --------------------------------------------------------- */}
-
-                <div className="hidden items-center gap-2 lg:flex">
-
-                    {/* Search */}
-
-                    <div className="relative">
-
-                        <button
-                            type="button"
-                            onClick={() => setSearchOpen((current) => !current)}
-                            className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
-                            aria-label="Open search"
-                            aria-expanded={searchOpen}
-                        >
-                            <FaMagnifyingGlass />
-                        </button>
-
-                        {searchOpen && (
-                            <form
-                                onSubmit={handleSearch}
-                                className="absolute right-0 top-12 flex w-72 items-center gap-2 rounded-xl border border-gray-200 bg-white p-2 shadow-xl"
-                            >
-                                <FaMagnifyingGlass className="ml-2 text-sm text-gray-400" />
-
-                                <input
-                                    type="search"
-                                    value={searchQuery}
-                                    onChange={(event) =>
-                                        setSearchQuery(event.target.value)
-                                    }
-                                    placeholder="Search..."
-                                    className="min-w-0 flex-1 border-0 bg-transparent px-2 py-2 text-sm outline-none placeholder:text-gray-400"
-                                    aria-label="Search"
-                                    autoFocus
-                                />
-
-                                <button
-                                    type="submit"
-                                    className="rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-gray-700"
+                            return (
+                                <a
+                                    key={item.label}
+                                    href={item.href}
+                                    className="group flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
                                 >
-                                    Search
-                                </button>
-                            </form>
-                        )}
+                                    <Icon className="text-sm transition group-hover:scale-105" />
+                                    <span>{item.label}</span>
+                                </a>
+                            );
+                        })}
 
                     </div>
 
-                    {/* Login */}
+                    {/* --------------------------------------------------------
+                          Desktop right-side actions
+                        --------------------------------------------------------- */}
 
-                    <Link
-                        to="/login"
-                        className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
-                    >
-                        <FaRightToBracket />
-                        <span>Login</span>
-                    </Link>
+                    <div className="hidden items-center gap-2 lg:flex">
 
-                    {/* Sign Up */}
+                        {/* Search */}
 
-                    <Link
-                        to="/signup"
-                        className="flex items-center gap-2 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-700"
-                    >
-                        <FaUserPlus />
-                        <span>Sign Up</span>
-                    </Link>
+                        <div className="relative">
 
-                </div>
+                            <button
+                                type="button"
+                                onClick={() => setSearchOpen((current) => !current)}
+                                className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+                                aria-label="Open search"
+                                aria-expanded={searchOpen}
+                            >
+                                <FaMagnifyingGlass />
+                            </button>
 
-                {/* --------------------------------------------------------
+                            {searchOpen && (
+                                <form
+                                    onSubmit={handleSearch}
+                                    className="absolute right-0 top-12 flex w-72 items-center gap-2 rounded-xl border border-gray-200 bg-white p-2 shadow-xl"
+                                >
+                                    <FaMagnifyingGlass className="ml-2 text-sm text-gray-400" />
+
+                                    <input
+                                        type="search"
+                                        value={searchQuery}
+                                        onChange={(event) =>
+                                            setSearchQuery(event.target.value)
+                                        }
+                                        placeholder="Search..."
+                                        className="min-w-0 flex-1 border-0 bg-transparent px-2 py-2 text-sm outline-none placeholder:text-gray-400"
+                                        aria-label="Search"
+                                        autoFocus
+                                    />
+
+                                    <button
+                                        type="submit"
+                                        className="rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-gray-700"
+                                    >
+                                        Search
+                                    </button>
+                                </form>
+                            )}
+
+                        </div>
+
+                        {/* Login */}
+
+                        <Link
+                            to="/login"
+                            className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
+                        >
+                            <FaRightToBracket />
+                            <span>Login</span>
+                        </Link>
+
+                        {/* Sign Up */}
+
+                        <Link
+                            to="/signup"
+                            className="flex items-center gap-2 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-700"
+                        >
+                            <FaUserPlus />
+                            <span>Sign Up</span>
+                        </Link>
+
+                    </div>
+
+                    {/* --------------------------------------------------------
                       Mobile menu button
                     -------------------------------------------------------- */}
 
-                <button
-                    type="button"
-                    onClick={() =>
-                        setMobileMenuOpen((current) => !current)
-                    }
-                    className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-700 transition hover:bg-gray-100 lg:hidden"
-                    aria-label={
-                        mobileMenuOpen
-                            ? "Close navigation menu"
-                            : "Open navigation menu"
-                    }
-                    aria-expanded={mobileMenuOpen}
-                >
-                    {mobileMenuOpen ? <FaXmark /> : <FaBars />}
-                </button>
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setMobileMenuOpen((current) => !current)
+                        }
+                        className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-700 transition hover:bg-gray-100 lg:hidden"
+                        aria-label={
+                            mobileMenuOpen
+                                ? "Close navigation menu"
+                                : "Open navigation menu"
+                        }
+                        aria-expanded={mobileMenuOpen}
+                    >
+                        {mobileMenuOpen ? <FaXmark /> : <FaBars />}
+                    </button>
+                </div>
 
             </nav>
 
@@ -304,7 +308,6 @@ export default function Navbar() {
                 </div>
             )}
 
-            {/* </header> */}
         </div>
     );
 }

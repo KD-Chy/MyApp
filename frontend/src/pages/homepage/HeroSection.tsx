@@ -13,7 +13,7 @@ import { SITE_NAME } from "@/constraint/constraints";
 
 export default function HeroSection() {
     return (
-        <div>
+        <div className="bg-primary">
             {/* ============================================================
                 | HERO SECTION
                 ============================================================ */}

@@ -1,4 +1,4 @@
-import useGoBack from "../../hooks/useGoBack";
+import useGoBack from "@/hooks/useGoBack";
 export default function UserDashboard() {
     const goBack = useGoBack();
 

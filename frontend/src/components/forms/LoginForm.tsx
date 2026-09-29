@@ -1,17 +1,18 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
-import type { LoginFormData, LoginErrors } from "../../types/auth";
-import { login } from "../../services/authservice";
-import { validateLogin } from "../../utils/validators";
+import { FaEnvelope } from "react-icons/fa";
+
+import type { LoginFormData, LoginErrors } from "@/types/auth";
+import { login } from "@/services/authservice";
+import { validateLogin } from "@/utils/validators";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Checkbox from '../inputs/Checkbox';
 import GoogleButton from '../buttons/GoogleButton';
 import GitHubButton from "../buttons/GitHubButton";
 import MicrosoftButton from "../buttons/MicrosoftButton";
-import { FaEnvelope } from "react-icons/fa";
-import { saveAuth } from "../../services/authStorage";
-import { useAuth } from "../../context/AuthContext"
+import { saveAuth } from "@/services/authStorage";
+import { useAuth } from "@/context/AuthContext"
 
 export default function LoginForm() {
     const navigate = useNavigate();
@@ -107,7 +108,7 @@ export default function LoginForm() {
         }
     };
     return (
-        <div className="w-full min-h-screen flex items-center justify-center px-4 py-4 overflow-hidden sm:px-6 lg:px-8 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200">
+        <div className="w-full min-h-screen flex items-center justify-center px-4 py-4 overflow-hidden sm:px-6 lg:px-8 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200">
             <form
                 onSubmit={handleSubmit}
                 className="w-full max-w-md rounded-lg border border-gray-300 bg-pink-100 p-6 shadow-lg">
@@ -128,7 +129,9 @@ export default function LoginForm() {
 
                 {/* Display server error */}
                 {isLoginError && (
-                    <div className="mt-4 w-full rounded-md bg-red-100 px-3 py-2 text-sm text-red-700 justify-center break-words">
+                    <div className="mt-4 w-full rounded-md bg-red-100 px-3 py-2 text-sm text-red-700
+                        justify-center wrap-break-word"
+                    >
                         {isLoginError}
                     </div>
                 )}

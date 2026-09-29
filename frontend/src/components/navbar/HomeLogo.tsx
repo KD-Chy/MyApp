@@ -1,4 +1,4 @@
-import { SITE_NAME } from "../../constraint/constraints";
+import { SITE_NAME } from "@/constraint/constraints";
 
 import { FaHouse } from "react-icons/fa6";
 
@@ -37,7 +37,7 @@ export default function HomeLogo() {
                         {SITE_NAME}
                     </span>
 
-                    <span className="hidden text-xs text-gray-500 sm:block">
+                    <span className="hidden text-xs sm:block">
                         Smart. Secure. Simple.
                     </span>
                 </div>
