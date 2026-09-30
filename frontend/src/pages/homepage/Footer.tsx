@@ -7,7 +7,7 @@ import{
     FaTwitter,
 } from "react-icons/fa6";
 
-import { SITE_NAME } from "@/constraint/constraints";
+import { SITE_NAME } from "@/constants/constants";
 
 export default function Footer() {
     return (

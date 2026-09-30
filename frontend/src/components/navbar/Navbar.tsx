@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -39,25 +39,75 @@ const navigationItems = [
 ];
 
 export default function Navbar() {
+    /*
+    |-------------------------
+    | State
+    |-------------------------
+    */
+
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [scrolled, setScrolled] = useState(false);
 
     /*
-    |--------------------------
-    | Close mobile menu
-    |--------------------------
+    |-------------------------
+    | Effects
+    |-------------------------
+    */
+
+    /*
+    |-------------------------
+    | Effect -> scroll behavior
+    |-------------------------
+    */
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    /*
+    |-------------------------
+    | Effect -> search outside-click behavior
+    |-------------------------
+    */
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                searchRef.current &&
+                !searchRef.current.contains(event.target as Node)
+            ) {
+                // Keep search open if user has typed something(space)
+                if (searchQuery.trim() !== "") {
+                    return;
+                }
+                setSearchOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [searchQuery]);
+
+    /*
+    |---------------------------
+    | Handlers
+    |---------------------------
     */
 
     const closeMobileMenu = () => {
         setMobileMenuOpen(false);
     };
-
-    /*
-    |---------------------------
-    | Search handler
-    |---------------------------
-    */
 
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -80,18 +130,23 @@ export default function Navbar() {
         console.log("Search query:", query);
     };
 
+    const searchRef = useRef<HTMLDivElement>(null);
     return (
         <div>
             {/* ================================================================
                 | Navbar
                 ================================================================ */}
-            <nav
+            {/* <nav
                 className="absolute left-0 top-0 z-50 w-full bg-primary"
+                aria-label="Main navigation"
+            > */}
+            <nav
+                className={`fixed left-0 top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "bg-white shadow-md" : "bg-primary"
+                    }`}
                 aria-label="Main navigation"
             >
                 <div
                     className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
-                    aria-label="Main navigation"
                 >
 
                     {/* --------------------------------------------------------
@@ -113,7 +168,13 @@ export default function Navbar() {
                                 <a
                                     key={item.label}
                                     href={item.href}
-                                    className="group flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+                                    // className="group flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium
+                                    //         text-white transition hover:bg-gray-700 hover:text-white"
+
+                                    className={`group flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition ${scrolled ?
+                                        "text-gray-900 hover:bg-gray-300" :
+                                        "text-gray-100 hover:bg-gray-500 hover:text-gray-100"
+                                        }`}
                                 >
                                     <Icon className="text-sm transition group-hover:scale-105" />
                                     <span>{item.label}</span>
@@ -125,19 +186,22 @@ export default function Navbar() {
 
                     {/* --------------------------------------------------------
                           Desktop right-side actions
-                        --------------------------------------------------------- */}
+                        -------------------------------------------------------- */}
 
                     <div className="hidden items-center gap-2 lg:flex">
-
-                        {/* Search */}
-
-                        <div className="relative">
-
+                        <div
+                            ref={searchRef}
+                            className="flex h-10 items-center overflow-hidden rounded-xl transition-all duration-300"
+                        >
+                            {/* Search icon */}
                             <button
                                 type="button"
                                 onClick={() => setSearchOpen((current) => !current)}
-                                className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
-                                aria-label="Open search"
+                                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition ${scrolled
+                                    ? "text-gray-900 hover:bg-gray-300"
+                                    : "text-gray-100 hover:bg-gray-500"
+                                    }`}
+                                aria-label={searchOpen ? "Close search" : "Open search"}
                                 aria-expanded={searchOpen}
                             >
                                 <FaMagnifyingGlass />
@@ -146,10 +210,9 @@ export default function Navbar() {
                             {searchOpen && (
                                 <form
                                     onSubmit={handleSearch}
-                                    className="absolute right-0 top-12 flex w-72 items-center gap-2 rounded-xl border border-gray-200 bg-white p-2 shadow-xl"
+                                    className="flex items-center"
                                 >
-                                    <FaMagnifyingGlass className="ml-2 text-sm text-gray-400" />
-
+                                    {/* Small typing field */}
                                     <input
                                         type="search"
                                         value={searchQuery}
@@ -157,27 +220,34 @@ export default function Navbar() {
                                             setSearchQuery(event.target.value)
                                         }
                                         placeholder="Search..."
-                                        className="min-w-0 flex-1 border-0 bg-transparent px-2 py-2 text-sm outline-none placeholder:text-gray-400"
-                                        aria-label="Search"
                                         autoFocus
+                                        aria-label="Search"
+                                        className={`w-26.25 border-0 bg-transparent px-2 text-sm outline-none placeholder:text-gray-400 ${scrolled
+                                            ? "text-gray-900"
+                                            : "text-gray-100 placeholder:text-gray-300"
+                                            }`}
                                     />
 
+                                    {/* Search button */}
                                     <button
                                         type="submit"
-                                        className="rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-gray-700"
+                                        className={`mr-1 shrink-0 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-sm font-medium transition ${scrolled
+                                            ? "bg-gray-900 text-white hover:bg-gray-700"
+                                            : "bg-white text-gray-900 hover:bg-gray-200"
+                                            }`}
                                     >
                                         Search
                                     </button>
                                 </form>
                             )}
-
                         </div>
-
-                        {/* Login */}
-
                         <Link
                             to="/login"
-                            className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
+                            // className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
+                            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${scrolled ?
+                                "text-gray-900 hover:bg-gray-300" :
+                                "text-gray-100 hover:bg-gray-500 hover:text-gray-100"
+                                }`}
                         >
                             <FaRightToBracket />
                             <span>Login</span>
@@ -187,7 +257,11 @@ export default function Navbar() {
 
                         <Link
                             to="/signup"
-                            className="flex items-center gap-2 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-700"
+                            // className="flex items-center gap-2 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-700"
+                            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${scrolled ?
+                                "text-gray-900 hover:bg-gray-300" :
+                                "text-gray-100 hover:bg-gray-500 hover:text-gray-100"
+                                }`}
                         >
                             <FaUserPlus />
                             <span>Sign Up</span>

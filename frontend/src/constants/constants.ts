@@ -1,3 +1,5 @@
+// Rules or restrictions that something must follow
+
 /*
 |--------------------------------------------------------------------------
 | Website configuration
