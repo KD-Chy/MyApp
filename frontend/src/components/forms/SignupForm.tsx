@@ -101,6 +101,8 @@ export default function SignupForm() {
     return (
         <div className="w-full min-h-screen flex items-center justify-center">
             <form
+                id="signup-form"
+                name="signup-form"
                 onSubmit={handleSubmit}
                 className="w-full max-w-md p-6 bg-pink-100 border border-gray-300 rounded-lg shadow-lg">
                 <div className="text-center">

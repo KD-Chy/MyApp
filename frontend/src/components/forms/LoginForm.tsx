@@ -110,6 +110,8 @@ export default function LoginForm() {
     return (
         <div className="w-full min-h-screen flex items-center justify-center px-4 py-4 overflow-hidden sm:px-6 lg:px-8 bg-linear-to-r from-pink-200 via-purple-200 to-blue-200">
             <form
+                id="login-form"
+                name="login-form"
                 onSubmit={handleSubmit}
                 className="w-full max-w-md rounded-lg border border-gray-300 bg-pink-100 p-6 shadow-lg">
                 {/* Form Header */}

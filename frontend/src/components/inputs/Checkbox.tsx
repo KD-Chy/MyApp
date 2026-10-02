@@ -11,8 +11,9 @@ export default function Checkbox({
     return (
         <div>
             <input
-                type="checkbox"
+                id={name}
                 name={name}
+                type="checkbox"
                 checked={checked}
                 onChange={onChange}
             />

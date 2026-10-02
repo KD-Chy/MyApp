@@ -99,6 +99,8 @@ export default function NavbarSearch({
         return (
             <div ref={searchRef} className="mt-4">
                 <form
+                    id="mobile-search"
+                    name="mobile-search"
                     onSubmit={handleSearch}
                     className={`flex items-center gap-3 rounded-lg border px-3 py-2 text-sm transition-colors ${scrolled
                         ? "border-gray-300"
@@ -115,6 +117,8 @@ export default function NavbarSearch({
                     />
 
                     <input
+                        id="mobile-search-input"
+                        name="mobile-search-input"
                         type="search"
                         value={searchQuery}
                         onChange={(event) =>
@@ -175,10 +179,13 @@ export default function NavbarSearch({
             {searchOpen && (
                 <form
                     id="desktop-search"
+                    name="desktop-search"
                     onSubmit={handleSearch}
                     className="flex items-center"
                 >
                     <input
+                        id="desktop-search-input"
+                        name="desktop-search-input"
                         type="search"
                         value={searchQuery}
                         onChange={(event) =>
