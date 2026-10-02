@@ -18,17 +18,21 @@ export default function ForgotPassword() {
 
     return (
         <div className="min-h-screen flex items-center justify-center">
-            <form className="w-full max-w-md p-6 bg-pink-100 border border-gray-300 rounded-lg shadow-lg space-y-5">
+            <form
+                id="forgot-password-form"
+                name="forgot-password-form"
+                className="w-full max-w-md p-6 bg-pink-100 border border-gray-300 rounded-lg shadow-lg space-y-5">
                 <h1 className="text-2xl font-bold text-center">
                     Reset your password
                 </h1>
                 <div>
                     <label>Email Address*:</label>
                     <input
+                        id="username"
+                        name="username"
                         type="email"
-                        name="username"// Allows e.target.name return "username", so handleChange knows which state property to update.
                         placeholder="Enter your email address"
-                        value={form.username}// Displays the current value of form.username in the input field
+                        value={form.username}
                         onChange={handleChange}
                         className="w-full rounded-md border border-black-300 px-2 py-2 pr-10"
                     />

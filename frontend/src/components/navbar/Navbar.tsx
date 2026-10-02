@@ -83,7 +83,9 @@ export default function Navbar() {
                 ================================================================ */}
 
             <nav
-                className={`fixed left-0 top-0 z-50 w-full transition-colors duration-300 ${scrolled ?
+                id="nav-items"
+                role="navigation"
+                className={`sticky left-0 top-0 z-50 w-full transition-colors duration-300 ${scrolled ?
                     "bg-gray-100 shadow-md" :
                     "bg-primary"
                     }`}

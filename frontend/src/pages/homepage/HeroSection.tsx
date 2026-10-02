@@ -13,17 +13,17 @@ import { SITE_NAME } from "@/constants/constants";
 
 export default function HeroSection() {
     return (
-        <div className="bg-primary">
+        <div>
             {/* ============================================================
                 | HERO SECTION
                 ============================================================ */}
 
             <section
                 id="home"
-                className="scroll-mt-24"
+                className="bg-gray-500 scroll-mt-24"
             >
-
-                <div className="mx-auto grid min-h-[calc(100vh-81px)] max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
+                {/* Navbar already contains 81px height that's why minus 81px */}
+                <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-0 px-4 py-10 sm:gap-0 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-10">
 
                     {/* Hero content */}
 
@@ -34,17 +34,15 @@ export default function HeroSection() {
                             <span>Welcome to {SITE_NAME}</span>
                         </div>
 
-                        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+                        <h1 className="text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl lg:text-6xl">
                             A smarter way to manage your digital experience.
                         </h1>
 
-                        <p className="mt-6 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
+                        <p className="mt-6 max-w-xl text-base leading-8 text-gray-300 sm:text-lg">
                             {SITE_NAME} provides a modern, secure, and
                             user-focused platform designed to make your
                             everyday digital experience simple and efficient.
                         </p>
-
-                        {/* Hero actions */}
 
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
 
@@ -66,8 +64,6 @@ export default function HeroSection() {
 
                         </div>
 
-                        {/* Trust indicators */}
-
                         <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 justify-between text-sm text-gray-500">
 
                             <div className="flex items-center gap-2">
@@ -85,43 +81,16 @@ export default function HeroSection() {
                                 User Friendly
                             </div>
 
-                            <div className="flex items-center gap-2">
-                                <FaCircleCheck />
-                                User Friendly
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <FaCircleCheck />
-                                User Friendly
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <FaCircleCheck />
-                                User Friendly
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <FaCircleCheck />
-                                User Friendly
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <FaCircleCheck />
-                                User Friendly
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <FaCircleCheck />
-                                User Friendly
-                            </div>
-
                         </div>
 
                     </div>
 
                     {/* Hero visual */}
 
-                    <div className="relative">
+                    <div
+                        className="relative"
+                        aria-hidden="true"
+                    >
 
                         <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-xl sm:p-8">
 
