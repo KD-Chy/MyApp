@@ -23,7 +23,7 @@ export default function HeroSection() {
                 className="bg-gray-500 scroll-mt-24"
             >
                 {/* Navbar already contains 81px height that's why minus 81px */}
-                <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-0 px-4 py-10 sm:gap-0 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-10">
+                <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-0 px-4 py-10 sm:gap-0 sm:px-6 lg:gap-10 lg:grid-cols-2 lg:px-8 lg:py-10">
 
                     {/* Hero content */}
 
