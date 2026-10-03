@@ -99,7 +99,7 @@ export default function SignupForm() {
         }
     };
     return (
-        <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="w-full min-h-screen px-4 py-4 flex items-center justify-center sm:px-6 lg:px-8">
             <form
                 id="signup-form"
                 name="signup-form"
@@ -127,7 +127,12 @@ export default function SignupForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <TextInput
                             id="firstName"
-                            label="First Name *:"
+                            label={
+                                <>
+                                    First Name <span className="text-red-500">*</span>:
+                                </>
+                            }
+                            // label="First Name *:"
                             name="firstName"
                             placeholder="Enter first name"
                             value={form.firstName}
@@ -143,7 +148,11 @@ export default function SignupForm() {
                         )}
                         <TextInput
                             id="lastName"
-                            label="Last Name *:"
+                            label={
+                                <>
+                                    Last Name <span className="text-red-500">*</span>:
+                                </>
+                            }
                             name="lastName"
                             placeholder="Enter last name"
                             value={form.lastName}
@@ -160,7 +169,11 @@ export default function SignupForm() {
                     </div>
                     <TextInput
                         id="username"
-                        label="Email *:"
+                        label={
+                            <>
+                                Email <span className="text-red-500">*</span>:
+                            </>
+                        }
                         name="username"
                         type="email"
                         placeholder="Enter your email"
@@ -177,7 +190,11 @@ export default function SignupForm() {
                     )}
                     <PasswordInput
                         id="password"
-                        label="Password *:"
+                        label={
+                            <>
+                                Password <span className="text-red-500">*</span>:
+                            </>
+                        }
                         name="password"
                         placeholder="Create a password"
                         value={form.password}
@@ -193,7 +210,11 @@ export default function SignupForm() {
                     <div className='space-y-3'>
                         <PasswordInput
                             id="confirmPassword"
-                            label="Confirm Password *:"
+                            label={
+                                <>
+                                    Confirm Password <span className="text-red-500">*</span>:
+                                </>
+                            }
                             name="confirmPassword"
                             placeholder="Confirm your password"
                             value={form.confirmPassword}

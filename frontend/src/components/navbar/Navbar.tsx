@@ -31,6 +31,7 @@ export default function Navbar() {
     | Effects
     |-------------------------
     */
+
     /*
     |------------------------------------------------------
     | Effect -> Escape key closes open menus when pressed
@@ -68,6 +69,25 @@ export default function Navbar() {
     }, []);
 
     /*
+    |-------------------------
+    | Effect -> Responsive breakpoint for mobile menu
+    |-------------------------
+    */
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) {
+                setMobileMenuOpen(false);
+            }
+        };
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    /*
     |------------------------------------------
     | Handler -> close mobile navigation menu
     |------------------------------------------
@@ -77,7 +97,7 @@ export default function Navbar() {
     };
 
     return (
-        <div>
+        <>
             {/* ================================================================
                 | Navbar
                 ================================================================ */}
@@ -99,7 +119,7 @@ export default function Navbar() {
                     | Home logo
                     --------------------------------------------------------- */}
 
-                    <HomeLogo />
+                        <HomeLogo />
 
                     {/* --------------------------------------------------------
                     | Desktop navigation
@@ -211,7 +231,7 @@ export default function Navbar() {
                             }`}
                     >
 
-                        <div className="mx-auto max-h-[calc(100vh-4rem)] max-w-7xl overflow-auto px-4 py-4 sm:px-6">
+                        <div className="mx-auto max-h-[calc(100dvh-4rem)] max-w-7xl overflow-auto px-4 py-4 sm:px-6">
 
                             <nav aria-label="Mobile navigation">
 
@@ -280,6 +300,6 @@ export default function Navbar() {
                 )}
             </nav>
 
-        </div>
+        </>
     );
 }

@@ -143,12 +143,7 @@ export default function LoginForm() {
                     <div>
                         <TextInput
                             id="email"
-                            label={
-                                <>
-                                    Email <span className="text-red-500">*</span>:
-                                </>
-                            }
-                            // label="Email *:"
+                            label="Email *:"
                             name="username"
                             type="email"
                             placeholder="Enter your email"
@@ -168,12 +163,7 @@ export default function LoginForm() {
                     <div>
                         <PasswordInput
                             id="password"
-                            label={
-                                <>
-                                    Password <span className="text-red-500">*</span>:
-                                </>
-                            }
-                            // label="Password *:"
+                            label="Password *:"
                             name="password"
                             placeholder="Enter your password"
                             value={form.password}
@@ -250,15 +240,6 @@ export default function LoginForm() {
                                 className="ml-1 underline text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
                             >
                                 Signup
-                            </Link>
-                        </p>
-                        <p className="text-center text-gray-600">
-                            Navbar{" "}
-                            <Link
-                                to="/navbar" //type="button" prevents from submitting the form without login
-                                className="ml-1 underline text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
-                            >
-                                Navbar
                             </Link>
                         </p>
                     </div>
