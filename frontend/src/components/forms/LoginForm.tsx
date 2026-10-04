@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaEnvelope } from "react-icons/fa";
 
 import type { LoginFormData, LoginErrors } from "@/types/auth";
-import { login } from "@/services/authservice";
+import { login } from "@/services/authService";
 import { validateLogin } from "@/utils/validators";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";

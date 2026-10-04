@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from "react";
 import type { SignupFormData, SignupErrors } from "@/types/auth";
-import { signup } from "@/services/authservice";
+import { signup } from "@/services/authService";
 import { validateSignup } from "@/utils/validators";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";

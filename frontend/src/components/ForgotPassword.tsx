@@ -8,7 +8,7 @@ import {
     FaShieldHalved,
 } from "react-icons/fa6";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+import { forgotPassword } from "../services/authService";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -36,33 +36,12 @@ const ForgotPassword = () => {
 
         try {
             setLoading(true);
-
-            const response = await fetch(
-                `${API_BASE_URL}/auth/password-reset/request/`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: normalizedEmail,
-                    }),
-                }
-            );
-
-            /*
-             * Important:
-             * The backend should return a generic response whether
-             * the email exists or does not exist.
-             *
-             * This prevents account enumeration.
-             */
-            if (!response.ok) {
-                throw new Error("Unable to process your request.");
-            }
+            
+            //authService.ts
+            await forgotPassword(normalizedEmail);
 
             setMessage(
-                "If an account exists for this email, you will receive a password reset link shortly."
+                "If an account exists for this email address, you will receive an email with a password reset link shortly. "
             );
 
             setEmail("");

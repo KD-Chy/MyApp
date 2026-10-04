@@ -1,6 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+import hashlib
+import secrets
+from django.conf import settings
+from django.utils import timezone
+
 # Create your models here.
 
 # Inherits built-in AbstractUser
@@ -29,15 +34,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
     
-
-import hashlib
-import secrets
-
-from django.conf import settings
-from django.db import models
-from django.utils import timezone
-
-
 class PasswordResetToken(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -46,7 +42,7 @@ class PasswordResetToken(models.Model):
     )
 
     token_hash = models.CharField(
-        max_length=128,
+        max_length=64,
         unique=True,
         db_index=True,
     )

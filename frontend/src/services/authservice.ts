@@ -11,10 +11,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const API_BASE_SIGNIN = `${API_BASE_URL}/login/`;
 const API_BASE_SIGNUP = `${API_BASE_URL}/signup/`;
+export const FORGOT_PASSWORD_API = `${API_BASE_URL}/auth/password-reset/request/`;
 
-// This can create cors issues if the frontend and backend are on different domains.
-// const API_BASE_SIGNIN = 'http://127.0.0.1:8000/api/login/';
-// const API_BASE_SIGNUP = 'http://127.0.0.1:8000/api/signup/';
 
 // Login API
 export async function login(
@@ -59,7 +57,7 @@ export async function login(
         }
 
         // Other client/API errors
-        throw new Error (
+        throw new Error(
             responseData.Error || "Unable to complete your response. Please try again."
         );
     }
@@ -83,3 +81,30 @@ export async function signup(payload: SignupFormData) {
     return responseData;
 }
 
+export const forgotPassword = async (email: string) => {
+    const response = await fetch(
+        FORGOT_PASSWORD_API,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email,
+            }),
+        }
+    );
+
+    /*
+    * Important:
+    * The backend should return a generic response whether
+    * the email exists or does not exist.
+    *
+    * This prevents account enumeration.
+    */
+
+    if (!response.ok) {
+        throw new Error("Unable to process your request.");
+    }
+    return response.json();
+}
