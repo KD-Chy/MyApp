@@ -1,5 +1,4 @@
 import hashlib
-from datetime import timedelta
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -9,8 +8,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from account_app.models import CustomUser, PasswordResetToken
 
-
-RESET_TOKEN_LIFETIME = timedelta(minutes=4)
+from account_app.constants.constants import RESET_TOKEN_LIFETIME
 
 @csrf_exempt
 @require_POST
@@ -88,8 +86,7 @@ def password_reset_request(request):
     )
 
     reset_url = (
-        f"{frontend_url}/reset-password/"
-        f"{raw_token}"
+        f"{frontend_url}/reset-password/{raw_token}"
     )
 
     send_mail(
