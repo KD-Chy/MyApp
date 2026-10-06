@@ -11,9 +11,14 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const API_BASE_SIGNIN = `${API_BASE_URL}/login/`;
 const API_BASE_SIGNUP = `${API_BASE_URL}/signup/`;
-export const FORGOT_PASSWORD_API = `${API_BASE_URL}/auth/password-reset/request/`;
+const FORGOT_PASSWORD_API = `${API_BASE_URL}/auth/password-reset/request/`;
+const PASSWORD_RESET_CONFIRM_API = `${API_BASE_URL}/auth/password-reset/confirm/`;
 
-
+export type PasswordResetConfirmPayload = {
+    token: string;
+    new_password: string;
+    confirm_password: string;
+};
 // Login API
 export async function login(
     payload: LoginFormData
@@ -108,3 +113,28 @@ export const forgotPassword = async (email: string) => {
     }
     return response.json();
 }
+
+export const confirmPasswordReset = async (
+    payload: PasswordResetConfirmPayload
+) => {
+    const response = await fetch(
+        PASSWORD_RESET_CONFIRM_API,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        }
+    );
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(
+            data?.detail ||
+            data?.message ||
+            "Unable to reset your password."
+        );
+    }
+
+    return data;
+};

@@ -44,6 +44,9 @@ const Navbar = lazy(
     () => import("@/components/navbar/Navbar")
 );
 
+const ResetPassword = lazy(
+    () => import("@/pages/auth/ResetPassword")
+);
 export default function AppRoutes() {
     return (
         <Suspense fallback={<div>Loading...</div>}>
@@ -88,6 +91,11 @@ export default function AppRoutes() {
                 <Route
                     path="/forgot-password"
                     element={<ForgotPassword />}
+                />
+
+                <Route
+                    path="/reset-password/:token"
+                    element={<ResetPassword />}
                 />
 
                 {/* =====================================================
