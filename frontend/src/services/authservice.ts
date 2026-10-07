@@ -12,7 +12,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const API_BASE_SIGNIN = `${API_BASE_URL}/login/`;
 const API_BASE_SIGNUP = `${API_BASE_URL}/signup/`;
 const FORGOT_PASSWORD_API = `${API_BASE_URL}/auth/password-reset/request/`;
-const PASSWORD_RESET_CONFIRM_API = `${API_BASE_URL}/auth/password-reset/confirm/`;
+const CONFIRM_PASSWORD_RESET_API = `${API_BASE_URL}/auth/password-reset/confirm/`;
 
 export type PasswordResetConfirmPayload = {
     token: string;
@@ -118,7 +118,7 @@ export const confirmPasswordReset = async (
     payload: PasswordResetConfirmPayload
 ) => {
     const response = await fetch(
-        PASSWORD_RESET_CONFIRM_API,
+        CONFIRM_PASSWORD_RESET_API,
         {
             method: "POST",
             headers: {

@@ -2,10 +2,38 @@ import { useMemo, useState } from "react";
 import { FaCheck, FaEye, FaEyeSlash } from "react-icons/fa";
 import { checkPasswordStrength } from "@/services/passwordStrength";
 
+type RequirementProps = {
+    fulfilled: boolean;
+    text: string;
+};
+
 type PasswordStrength = {
     label: "Very Weak" | "Weak" | "Medium" | "Strong" | "Very Strong";
     colorClass: string;
     width: string;
+};
+
+const Requirement = ({ fulfilled, text }: RequirementProps) => {
+    return (
+        <li className="flex items-center gap-2 text-sm">
+            <span
+                className={`flex h-4 w-4 items-center justify-center rounded-full ${fulfilled
+                        ? "bg-green-100 text-green-600"
+                        : "bg-gray-100 text-gray-400"
+                    }`}
+            >
+                {fulfilled && <FaCheck className="text-[9px]" />}
+            </span>
+
+            <span
+                className={
+                    fulfilled ? "text-gray-700" : "text-gray-400"
+                }
+            >
+                {text}
+            </span>
+        </li>
+    );
 };
 
 export const getPasswordStrength = (score: number): PasswordStrength => {
@@ -107,6 +135,7 @@ const CreatePasswordForm = () => {
         console.log("Reset password");
     };
 
+    
     return (
         <form
             onSubmit={handleSubmit}
@@ -309,32 +338,6 @@ const CreatePasswordForm = () => {
     );
 };
 
-type RequirementProps = {
-    fulfilled: boolean;
-    text: string;
-};
 
-const Requirement = ({ fulfilled, text }: RequirementProps) => {
-    return (
-        <li className="flex items-center gap-2 text-sm">
-            <span
-                className={`flex h-4 w-4 items-center justify-center rounded-full ${fulfilled
-                        ? "bg-green-100 text-green-600"
-                        : "bg-gray-100 text-gray-400"
-                    }`}
-            >
-                {fulfilled && <FaCheck className="text-[9px]" />}
-            </span>
-
-            <span
-                className={
-                    fulfilled ? "text-gray-700" : "text-gray-400"
-                }
-            >
-                {text}
-            </span>
-        </li>
-    );
-};
 
 export default CreatePasswordForm;
