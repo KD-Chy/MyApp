@@ -8,6 +8,34 @@ type PasswordStrength = {
     width: string;
 };
 
+type RequirementProps = {
+    fulfilled: boolean;
+    text: string;
+};
+
+const Requirement = ({ fulfilled, text }: RequirementProps) => {
+    return (
+        <li className="flex items-center gap-2 text-sm">
+            <span
+                className={`flex h-4 w-4 items-center justify-center rounded-full ${fulfilled
+                        ? "bg-green-100 text-green-600"
+                        : "bg-gray-100 text-gray-400"
+                    }`}
+            >
+                {fulfilled && <FaCheck className="text-[9px]" />}
+            </span>
+
+            <span
+                className={
+                    fulfilled ? "text-gray-700" : "text-gray-400"
+                }
+            >
+                {text}
+            </span>
+        </li>
+    );
+};
+
 export const getPasswordStrength = (score: number): PasswordStrength => {
     switch (score) {
         case 0:
@@ -96,7 +124,7 @@ const CreatePasswordForm = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        //very very important to check if the form can be submitted before proceeding
+        // very very important to check if the form can be submitted before proceeding
         // This means that the password meets all requirements and matches the confirmation password
         // This means that the user can't submit the form until every frontend requirement is met or passes, which is a good UX practice and also prevents unnecessary API calls
         // if (!canSubmit) {
@@ -309,32 +337,6 @@ const CreatePasswordForm = () => {
     );
 };
 
-type RequirementProps = {
-    fulfilled: boolean;
-    text: string;
-};
 
-const Requirement = ({ fulfilled, text }: RequirementProps) => {
-    return (
-        <li className="flex items-center gap-2 text-sm">
-            <span
-                className={`flex h-4 w-4 items-center justify-center rounded-full ${fulfilled
-                        ? "bg-green-100 text-green-600"
-                        : "bg-gray-100 text-gray-400"
-                    }`}
-            >
-                {fulfilled && <FaCheck className="text-[9px]" />}
-            </span>
-
-            <span
-                className={
-                    fulfilled ? "text-gray-700" : "text-gray-400"
-                }
-            >
-                {text}
-            </span>
-        </li>
-    );
-};
 
 export default CreatePasswordForm;

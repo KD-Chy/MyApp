@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from account_app.models import CustomUser, PasswordResetToken
 
 
-RESET_TOKEN_LIFETIME = timedelta(minutes=4)
+RESET_TOKEN_LIFETIME = timedelta(minutes=10)
 
 @csrf_exempt
 @require_POST

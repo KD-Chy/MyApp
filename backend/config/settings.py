@@ -15,17 +15,19 @@ import os
 
 # importing settings from .env file
 from dotenv import load_dotenv 
-load_dotenv()  # Load environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")  # Load environment variables from .env file
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rwl--$&fq_@!!zf(80h-n9ji$b47auf11zzaxa0uo$gld4v1%x'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +40,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'account_app.apps.AccountAppConfig', # Registering the account app in the project
     'corsheaders', # Enable CORS headers for handling cross-origin requests
+    
     'django.contrib.admin', # Enable the admin interface for managing the application
     'django.contrib.auth', # Enable authentication system
     'django.contrib.contenttypes', # Enable content type framework for handling different types of content
@@ -46,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', # Enable static file handling for serving CSS, JavaScript, and images
     
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 REST_FRAMEWORK = {
@@ -99,27 +103,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'myapp_db',
-        'USER': 'postgres',
-        
-        # Enter the password you used during PostgreSQL installation
-        'PASSWORD': '12345678',
-        'HOST': "localhost",
-        "PORT": "5432",
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        "PORT": os.environ.get('DB_PORT'),
     }
 }
 
 # Tells Django to use CustomUser model instead default auth.User table
 AUTH_USER_MODEL = 'account_app.CustomUser'
 
-
+# Argon2id password hasher
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -130,12 +132,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,  # Set the minimum password length to 8 characters
+        },
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -163,13 +165,11 @@ STATIC_URL = 'static/'
 # Email configuration for sending password reset emails
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587   
-EMAIL_USE_TLS = True
-
-# These variabeles are set in the .env file and loaded using python-dotenv
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))   
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS','True').lower() == 'true'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 FRONTEND_URL = "http://localhost:5173"
