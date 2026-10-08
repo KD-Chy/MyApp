@@ -15,10 +15,9 @@ urlpatterns = [
         password_reset_request,
         name="password_reset_request",
     ),
-    
-        path(
-        "auth/password-reset/confirm/",
-        password_reset_confirm,
-        name="password_reset_confirm",
+    path(
+    "auth/password-reset/confirm/",
+    password_reset_confirm,
+    name="password_reset_confirm",
     ),
 ]
