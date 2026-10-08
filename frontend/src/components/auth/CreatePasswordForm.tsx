@@ -2,15 +2,15 @@ import { useMemo, useState } from "react";
 import { FaCheck, FaEye, FaEyeSlash } from "react-icons/fa";
 import { checkPasswordStrength } from "@/services/passwordStrength";
 
+type RequirementProps = {
+    fulfilled: boolean;
+    text: string;
+};
+
 type PasswordStrength = {
     label: "Very Weak" | "Weak" | "Medium" | "Strong" | "Very Strong";
     colorClass: string;
     width: string;
-};
-
-type RequirementProps = {
-    fulfilled: boolean;
-    text: string;
 };
 
 const Requirement = ({ fulfilled, text }: RequirementProps) => {
@@ -134,7 +134,7 @@ const CreatePasswordForm = () => {
         // Connect your reset-password API here.
         console.log("Reset password");
     };
-
+    
     return (
         <form
             onSubmit={handleSubmit}
@@ -336,7 +336,5 @@ const CreatePasswordForm = () => {
         </form>
     );
 };
-
-
 
 export default CreatePasswordForm;

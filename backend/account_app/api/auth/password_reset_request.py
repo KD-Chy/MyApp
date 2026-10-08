@@ -7,8 +7,6 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from account_app.models import CustomUser, PasswordResetToken
-
-
 from account_app.constants.constants import RESET_TOKEN_LIFETIME
 
 
