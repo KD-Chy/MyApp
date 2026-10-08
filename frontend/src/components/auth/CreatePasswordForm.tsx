@@ -124,7 +124,7 @@ const CreatePasswordForm = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        //very very important to check if the form can be submitted before proceeding
+        // very very important to check if the form can be submitted before proceeding
         // This means that the password meets all requirements and matches the confirmation password
         // This means that the user can't submit the form until every frontend requirement is met or passes, which is a good UX practice and also prevents unnecessary API calls
         // if (!canSubmit) {
@@ -134,7 +134,6 @@ const CreatePasswordForm = () => {
         // Connect your reset-password API here.
         console.log("Reset password");
     };
-
     
     return (
         <form
@@ -337,7 +336,5 @@ const CreatePasswordForm = () => {
         </form>
     );
 };
-
-
 
 export default CreatePasswordForm;
