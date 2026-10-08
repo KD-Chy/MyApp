@@ -2,8 +2,11 @@ from django.urls import path
 from .login import login_api
 from .signup import signup_api
 from .auth.password_reset_request import password_reset_request
+<<<<<<< HEAD
 
 # automatically added for testing
+=======
+>>>>>>> developer1
 from .auth.password_reset_confirm import password_reset_confirm
 # from .logout import logout_api
  
@@ -18,7 +21,11 @@ urlpatterns = [
         name="password_reset_request",
     ),
     
+<<<<<<< HEAD
     path(
+=======
+        path(
+>>>>>>> developer1
         "auth/password-reset/confirm/",
         password_reset_confirm,
         name="password_reset_confirm",

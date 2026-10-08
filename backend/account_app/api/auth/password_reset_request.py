@@ -8,7 +8,12 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from account_app.models import CustomUser, PasswordResetToken
 
+<<<<<<< HEAD
 from account_app.constants.constants import RESET_TOKEN_LIFETIME
+=======
+
+RESET_TOKEN_LIFETIME = timedelta(minutes=10)
+>>>>>>> developer1
 
 @csrf_exempt
 @require_POST
