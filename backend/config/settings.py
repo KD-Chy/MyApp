@@ -27,7 +27,7 @@ load_dotenv(BASE_DIR / ".env")  # Load environment variables from .env file
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rwl--$&fq_@!!zf(80h-n9ji$b47auf11zzaxa0uo$gld4v1%x'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'account_app.apps.AccountAppConfig', # Registering the account app in the project
     'corsheaders', # Enable CORS headers for handling cross-origin requests
+    
     'django.contrib.admin', # Enable the admin interface for managing the application
     'django.contrib.auth', # Enable authentication system
     'django.contrib.contenttypes', # Enable content type framework for handling different types of content
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', # Enable static file handling for serving CSS, JavaScript, and images
     
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 REST_FRAMEWORK = {
