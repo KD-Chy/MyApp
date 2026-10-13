@@ -1,17 +1,21 @@
-import hashlib
-
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.utils import timezone
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.http import require_POST
+# from django.views.decorators.csrf import csrf_exempt
 from account_app.models import CustomUser, PasswordResetToken
 from account_app.constants.constants import RESET_TOKEN_LIFETIME
+from rest_framework.decorators import api_view, throttle_classes
 
+from account_app.services.security.rate_limits import (
+    PasswordResetRequestThrottle,
+)
 
-@csrf_exempt
-@require_POST
+# @csrf_exempt
+# @require_POST
+@api_view(["POST"])
+@throttle_classes([PasswordResetRequestThrottle])
 def password_reset_request(request):
     """
     Request a password reset link.
