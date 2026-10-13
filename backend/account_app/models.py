@@ -81,3 +81,51 @@ class PasswordResetToken(models.Model):
 
     def __str__(self):
         return f"Password reset token for {self.user.username}"
+class SecurityEvent(models.Model):
+    """
+    Stores selected, meaningful account-security events.
+
+    Never store passwords, raw tokens, reset URLs, or credentials
+    in this model.
+    """
+
+    event = models.CharField(
+        max_length=100,
+        db_index=True,
+    )
+
+    # The account associated with this event, if known.
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="security_events",
+    )
+
+    client_ip = models.GenericIPAddressField(
+        null=True,
+        blank=True,
+    )
+
+    details = models.JSONField(
+        default=dict,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        db_index=True,
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(
+                fields=["event", "-created_at"],
+                name="sec_event_time_idx",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.event} at {self.created_at}"

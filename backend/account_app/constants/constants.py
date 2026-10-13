@@ -1,3 +1,4 @@
+# Store stable, non-secret application constants
 
 from datetime import timedelta
 

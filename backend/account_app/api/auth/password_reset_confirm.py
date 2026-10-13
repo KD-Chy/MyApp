@@ -1,15 +1,22 @@
 from django.core.exceptions import ValidationError
 
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import (
+    api_view,
+    throttle_classes
+)
 from rest_framework.response import Response
+
+from account_app.services.security.rate_limits import (
+    PasswordResetConfirmThrottle,
+)
 
 from account_app.services.password_reset_service import (
     PasswordResetService,
 )
 
-
 @api_view(["POST"])
+@throttle_classes([PasswordResetConfirmThrottle])
 def password_reset_confirm(request):
     """
     Confirm a password reset using a valid password-reset token.
