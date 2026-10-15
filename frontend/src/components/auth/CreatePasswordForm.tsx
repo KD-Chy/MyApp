@@ -110,7 +110,7 @@ const CreatePasswordForm = () => {
         //     return;
         // }
 
-        // Connect your reset-password API here.
+        // Connected reset-password API here.
 
         if (isSubmitting || isSuccess) {
             return;
@@ -387,7 +387,7 @@ const CreatePasswordForm = () => {
             {errorMessage && (
                 <p
                     role="alert"
-                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                    className="rounded-lg border text-center justify-center border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
                 >
                     {errorMessage}
                 </p>
