@@ -1,58 +1,58 @@
-import { useMemo, useState } from "react";
+// import { useMemo, useState } from "react";
+import { useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaCheck, FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { checkPasswordStrength } from "@/services/passwordStrength";
+// import { checkPasswordStrength } from "@/services/passwordStrength";
+import PasswordStrengthIndicator from "@/components/auth/PasswordStrengthIndicator";
 import { confirmPasswordReset } from "@/services/authService";
 
+// type PasswordStrength = {
+//     label: "Very Weak" | "Weak" | "Medium" | "Strong" | "Very Strong";
+//     colorClass: string;
+//     width: string;
+// };
 
-
-type PasswordStrength = {
-    label: "Very Weak" | "Weak" | "Medium" | "Strong" | "Very Strong";
-    colorClass: string;
-    width: string;
-};
-
-export const getPasswordStrength = (score: number): PasswordStrength => {
-    switch (score) {
-        case 0:
-            return {
-                label: "Very Weak",
-                colorClass: "bg-red-500",
-                width: "w-1/4",
-            };
-        case 1:
-            return {
-                label: "Weak",
-                colorClass: "bg-red-500",
-                width: "w-2/4",
-            };
-        case 2:
-            return {
-                label: "Medium",
-                colorClass: "bg-yellow-500",
-                width: "w-3/4",
-            };
-        case 3:
-            return {
-                label: "Strong",
-                colorClass: "bg-green-500",
-                width: "w-full",
-            };
-        case 4:
-            return {
-                label: "Very Strong",
-                colorClass: "bg-green-600",
-                width: "w-full",
-            };
-        default:
-            return {
-                label: "Very Weak",
-                colorClass: "bg-red-500",
-                width: "w-1/4",
-            };
-    }
-}
+// export const getPasswordStrength = (score: number): PasswordStrength => {
+//     switch (score) {
+//         case 0:
+//             return {
+//                 label: "Very Weak",
+//                 colorClass: "bg-red-500",
+//                 width: "w-1/4",
+//             };
+//         case 1:
+//             return {
+//                 label: "Weak",
+//                 colorClass: "bg-red-500",
+//                 width: "w-2/4",
+//             };
+//         case 2:
+//             return {
+//                 label: "Medium",
+//                 colorClass: "bg-yellow-500",
+//                 width: "w-3/4",
+//             };
+//         case 3:
+//             return {
+//                 label: "Strong",
+//                 colorClass: "bg-green-500",
+//                 width: "w-full",
+//             };
+//         case 4:
+//             return {
+//                 label: "Very Strong",
+//                 colorClass: "bg-green-600",
+//                 width: "w-full",
+//             };
+//         default:
+//             return {
+//                 label: "Very Weak",
+//                 colorClass: "bg-red-500",
+//                 width: "w-1/4",
+//             };
+//     }
+// }
 
 const CreatePasswordForm = () => {
     const { token } = useParams<{ token: string }>();
@@ -67,20 +67,20 @@ const CreatePasswordForm = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const passwordStrengthResult = useMemo(
-        () => checkPasswordStrength(password),
-        [password]
-    );
+    // const passwordStrengthResult = useMemo(
+    //     () => checkPasswordStrength(password),
+    //     [password]
+    // );
 
-    const strength = useMemo(
-        () => getPasswordStrength(passwordStrengthResult.score),
-        [passwordStrengthResult.score]
-    );
+    // const strength = useMemo(
+    //     () => getPasswordStrength(passwordStrengthResult.score),
+    //     [passwordStrengthResult.score]
+    // );
 
-    const filledPieces =
-        password.length > 0
-            ? Math.min(passwordStrengthResult.score + 1, 4)
-            : 0;
+    // const filledPieces =
+    //     password.length > 0
+    //         ? Math.min(passwordStrengthResult.score + 1, 4)
+    //         : 0;
 
     const meetsMinimumLength = password.length >= 8;
 
@@ -155,14 +155,14 @@ const CreatePasswordForm = () => {
             setIsSubmitting(false);
         }
     };
-    const strengthTextColor =
-        strength.label === "Very Strong" || strength.label === "Strong"
-            ? "text-green-600"
-            : strength.label === "Medium"
-                ? "text-yellow-600"
-                : strength.label === "Weak"
-                    ? "text-orange-600"
-                    : "text-red-600";
+    // const strengthTextColor =
+    //     strength.label === "Very Strong" || strength.label === "Strong"
+    //         ? "text-green-600"
+    //         : strength.label === "Medium"
+    //             ? "text-yellow-600"
+    //             : strength.label === "Weak"
+    //                 ? "text-orange-600"
+    //                 : "text-red-600";
 
     if (isSuccess) {
         return (
@@ -173,8 +173,8 @@ const CreatePasswordForm = () => {
             >
                 <div className="flex justify-center">
                     {/* Actual logo component */}
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-900 text-xl font-bold text-white">
-                        A
+                    <div className="items-center justify-center text-2xl font-bold">
+                        MyApp
                     </div>
                 </div>
                 <div className="text-center">
@@ -208,22 +208,22 @@ const CreatePasswordForm = () => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="w-full max-w-md space-y-6"
+            className="w-full max-w-md p-6 rounded-2xl space-y-6 border border-gray-300 bg-pink-100 "
             noValidate
         >
             {/* Logo */}
             <div className="flex justify-center">
                 <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-900 text-xl font-bold text-white"
+                    className="items-center justify-center text-2xl font-bold"
                     aria-label="MyApp"
                 >
-                    A
+                    MyApp
                 </div>
             </div>
 
             {/* Heading */}
             <div className="text-center">
-                <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+                <h1 className="text-xl font-bold tracking-tight text-gray-900">
                     Create a new password
                 </h1>
 
@@ -265,52 +265,43 @@ const CreatePasswordForm = () => {
                     <button
                         type="button"
                         onClick={() => setShowPassword((current) => !current)}
-                        aria-label={
-                            showPassword
-                                ? "Hide password"
-                                : "Show password"
-                        }
+                        aria-label={showPassword ? "Hide password" : "Show password"}
                         aria-pressed={showPassword}
                         className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 transition hover:text-gray-700"
                     >
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
-            </div>
-
-            {/* Four-piece progressive strength bar */}
-            <div className="flex items-center gap-3">
-                <div
-                    className="flex flex-1 gap-1"
-                    role="progressbar"
-                    aria-valuemin={0}
-                    aria-valuemax={4}
-                    aria-valuenow={filledPieces}
-                    aria-label={
-                        password.length > 0
-                            ? `Password strength: ${strength.label}`
-                            : "Password strength not yet evaluated"
-                    }
-                >
-                    {[1, 2, 3, 4].map((piece) => (
+                <PasswordStrengthIndicator password = {password} />
+                {/* {password.length > 0 && (
+                    <div className="flex w-full items-center justify-end gap-2">
                         <div
-                            key={piece}
-                            className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${piece <= filledPieces
-                                ? strength.colorClass
-                                : "bg-gray-300"
-                                }`}
-                        />
-                    ))}
-                </div>
+                            className="flex w-16 shrink-0 gap-0.5"
+                            role="progressbar"
+                            aria-valuemin={0}
+                            aria-valuemax={4}
+                            aria-valuenow={filledPieces}
+                            aria-label={`Password strength: ${strength.label}`}
+                        >
+                            {[1, 2, 3, 4].map((piece) => (
+                                <div
+                                    key={piece}
+                                    className={`h-1 flex-1 rounded-full transition-colors duration-300 ${piece <= filledPieces
+                                        ? strength.colorClass
+                                        : "bg-gray-300"
+                                        }`}
+                                />
 
-                {/* Strength label */}
-                {password.length > 0 && (
-                    <span
-                        className={`shrink-0 text-xs font-semibold ${strengthTextColor}`}
-                    >
-                        {strength.label}
-                    </span>
-                )}
+                            ))}
+                        </div>
+
+                        <span
+                            className={`shrink-0 whitespace-nowrap text-xs font-semibold ${strengthTextColor}`}
+                        >
+                            {strength.label}
+                        </span>
+                    </div>
+                )} */}
             </div>
 
             {/* Confirm password */}
