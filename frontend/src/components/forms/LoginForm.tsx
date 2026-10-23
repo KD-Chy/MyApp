@@ -5,6 +5,7 @@ import { FaEnvelope } from "react-icons/fa";
 import type { LoginFormData, LoginErrors } from "@/types/auth";
 import { login } from "@/services/authService";
 import { validateLogin } from "@/utils/validators";
+import { disabledStyles } from "@/styles/uiStyles";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Checkbox from '../inputs/Checkbox';
@@ -209,9 +210,8 @@ export default function LoginForm() {
                         <button
                             type="submit" //type="submit" submits the form when clicked
                             disabled={loading}
-                            className="w-full rounded-lg border mb-4 text-white bg-blue-500 px-4 py-2
-                                                        shadow-xl font-medium transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:opacity-70
-                                                        cursor-pointer"
+                            className={`w-full rounded-lg border mb-4 text-white bg-blue-500 px-4 py-2
+                                        shadow-xl font-medium transition-colors hover:bg-blue-700 ${disabledStyles} disabled:bg-gray-400 cursor-pointer`}
                         >
                             {loading ? "Logging in..." : "Login"}
                         </button>
@@ -237,7 +237,7 @@ export default function LoginForm() {
                             Don't have an account?{" "}
                             <Link
                                 to="/signup-form" //type="button" prevents from submitting the form without login
-                                className="ml-1 underline text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
+                                className="ml-1 underline text-blue-600 hover:text-blue-800 font-medium rounded-2xl ${uiStyles} cursor-pointer"
                             >
                                 Signup
                             </Link>

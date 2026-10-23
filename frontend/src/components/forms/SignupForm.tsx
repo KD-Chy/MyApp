@@ -1,15 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { FaUser, FaEnvelope } from "react-icons/fa";
 import { useState } from "react";
 import type { SignupFormData, SignupErrors } from "@/types/auth";
 import { signup } from "@/services/authService"
 import { validateSignup } from "@/utils/validators";
+import {
+    disabledStyles,
+    focusLinkStyles,
+    focusButtonStyles,
+} from "@/styles/uiStyles";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Checkbox from '../inputs/Checkbox';
 import GoogleButton from '../buttons/GoogleButton';
 import GitHubButton from '../buttons/GitHubButton';
 import MicrosoftButton from '../buttons/MicrosoftButton';
-import { FaUser, FaEnvelope } from "react-icons/fa";
+import PasswordStrengthIndicator from "@/components/auth/PasswordStrengthIndicator";
 
 export default function SignupForm() {
     const [form, setForm] = useState<SignupFormData>({
@@ -202,11 +208,13 @@ export default function SignupForm() {
                         autoComplete="new-password"
                         required
                     />
+                    <PasswordStrengthIndicator password={form.password} />
                     {errorMessage.password && (
                         <p className="text-red-500 text-sm">
                             {errorMessage.password}
                         </p>
                     )}
+
                     <div className='space-y-3'>
                         <PasswordInput
                             id="confirmPassword"
@@ -239,7 +247,7 @@ export default function SignupForm() {
                                 <a
                                     href="/terms-of-service"
                                     target="_blank"
-                                    className="text-blue-600 hover:underline hover:text-blue-800"
+                                    className={`text-blue-600 hover:underline hover:text-blue-600 rounded-lg ${focusLinkStyles} ${disabledStyles}`}
                                 >
                                     Terms of Service
                                 </a>
@@ -247,7 +255,7 @@ export default function SignupForm() {
                                 <a
                                     href="/security-policy"
                                     target="_blank"
-                                    className="text-blue-600 hover:underline hover:text-blue-800"
+                                    className={`text-blue-600 hover:underline hover:text-blue-600 rounded-lg ${focusLinkStyles} ${disabledStyles}`}
                                 >
                                     Security Policy
                                 </a>
@@ -262,9 +270,8 @@ export default function SignupForm() {
                     <button
                         type="submit" //type="submit" submits the form when clicked
                         disabled={loading}
-                        className="w-full mb-4 text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 border rounded-lg
-                                    shadow-xl font-medium disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70
-                                    cursor-pointer"
+                        className={`w-full mb-4 text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 border rounded-xl
+                                    shadow-xl font-medium ${focusButtonStyles} disabled:bg-gray-400 ${disabledStyles}`}
                     >
                         {loading ? "Creating Account..." : "Create Account"}
                     </button>
@@ -286,7 +293,7 @@ export default function SignupForm() {
                         Already have an account?{" "}
                         <Link
                             to="/login" //type="button" prevents from submitting the form without login
-                            className="ml-1 underline text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
+                            className={`ml-1 underline text-blue-600 hover:text-blue-800 font-medium ${focusLinkStyles} cursor-pointer`}
                         >
                             Sign in
                         </Link>

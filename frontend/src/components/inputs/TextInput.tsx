@@ -1,5 +1,6 @@
 import type { IconType } from "react-icons";
 import type { ReactNode } from "react";
+import { focusFieldStyles } from "@/styles/uiStyles";
 
 interface TextInputProps {
     id: string;
@@ -57,7 +58,7 @@ export default function TextInput({
                     autoComplete={autoComplete}
                     required={required}
                     onChange={onChange}
-                    className={`w-full border border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 ${Icon ? "pl-10 pr-4" : "px-4"
+                    className={`w-full border border-gray-300 rounded-md py-2 ${focusFieldStyles} ${Icon ? "pl-10 pr-4" : "px-4"
                         }`}
                 />
             </div>
