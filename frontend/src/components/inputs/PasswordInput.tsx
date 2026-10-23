@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import type { ReactNode } from "react";
+import {
+    focusIconButtonStyles,
+    focusFieldStyles,
+} from "@/styles/uiStyles";
 
 // type PasswordInputProps = {
 //     id: string;
@@ -52,13 +56,13 @@ export default function PasswordInput({
                     autoComplete={autoComplete}
                     required={required}
                     onChange={onChange}
-                    className="w-full border border-gray-300 rounded-md pl-10 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className={`w-full border border-gray-300 rounded-md pl-10 pr-10 py-2 ${focusFieldStyles}`}
                 />
                 {/* Right icon */}
                 <button
                     type="button"
                     onClick={() => setShowPassword(prev => !prev)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 rounded-sm ${focusIconButtonStyles}`}
                     aria-label={
                         showPassword
                             ? "Hide password"
