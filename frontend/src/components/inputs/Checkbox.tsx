@@ -1,3 +1,5 @@
+import { focusIconButtonStyles } from "@/styles/uiStyles";
+
 type CheckboxProps = {
     name: string;
     checked: boolean;//form = property and variable, SignupFormData = type, form used because components needs acceptTerms value
@@ -16,6 +18,7 @@ export default function Checkbox({
                 type="checkbox"
                 checked={checked}
                 onChange={onChange}
+                className={`${focusIconButtonStyles} cursor-pointer`}
             />
         </div>
     );
