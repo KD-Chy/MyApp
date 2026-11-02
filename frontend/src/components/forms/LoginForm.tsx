@@ -5,7 +5,10 @@ import { FaEnvelope } from "react-icons/fa";
 import type { LoginFormData, LoginErrors } from "@/types/auth";
 import { login } from "@/services/authService";
 import { validateLogin } from "@/utils/validators";
-import { disabledStyles } from "@/styles/uiStyles";
+import {
+    focusLinkStyles,
+    disabledStyles,
+} from "@/styles/uiStyles";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Checkbox from '../inputs/Checkbox';
@@ -194,7 +197,7 @@ export default function LoginForm() {
 
                                 <Link
                                     to="/forgot-password"
-                                    className="text-blue-600 hover:underline"
+                                    className={`text-blue-600 hover:underline ${focusLinkStyles}`}
                                 >
                                     Forgot password?
                                 </Link>
@@ -237,7 +240,7 @@ export default function LoginForm() {
                             Don't have an account?{" "}
                             <Link
                                 to="/signup-form" //type="button" prevents from submitting the form without login
-                                className="ml-1 underline text-blue-600 hover:text-blue-800 font-medium rounded-2xl ${uiStyles} cursor-pointer"
+                                className={`underline text-blue-600 hover:text-blue-800 font-medium ${focusLinkStyles} cursor-pointer`}
                             >
                                 Signup
                             </Link>

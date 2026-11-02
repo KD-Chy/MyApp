@@ -8,8 +8,11 @@ import {
     focusIconButtonStyles,
     focusButtonStyles,
 } from "@/styles/uiStyles";
-
-// import { checkPasswordStrength } from "@/services/passwordStrength";
+import {
+    PASSWORD_MIN_LENGTH,
+    PASSWORD_MAX_LENGTH,
+} from "@/utils/passwordRules";
+import { validatePassword } from "@/utils/passwordValidator";
 import PasswordStrengthIndicator from "@/components/auth/PasswordStrengthIndicator";
 import { confirmPasswordReset } from "@/services/authService";
 
@@ -26,7 +29,8 @@ const CreatePasswordForm = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const meetsMinimumLength = password.length >= 8;
+    const passwordValidation = validatePassword(password);
+    const meetsPasswordRequirements = passwordValidation.isValid;
 
     const passwordsMatch =
         password.length > 0 &&
@@ -35,7 +39,7 @@ const CreatePasswordForm = () => {
 
     const canSubmit =
         Boolean(token) &&
-        meetsMinimumLength &&
+        meetsPasswordRequirements &&
         passwordsMatch &&
         !isSubmitting &&
         !isSuccess;
@@ -53,7 +57,7 @@ const CreatePasswordForm = () => {
         //     return;
         // }
 
-        // Connect your reset-password API here.
+        // Connected reset-password API here.
 
         if (isSubmitting || isSuccess) {
             return;
@@ -64,10 +68,8 @@ const CreatePasswordForm = () => {
             );
             return;
         }
-        if (!meetsMinimumLength) {
-            setErrorMessage(
-                "Your password must contain at least 8 charaters."
-            )
+        if (!passwordValidation.isValid) {
+            setErrorMessage(passwordValidation.error);
             return;
         }
         if (!passwordsMatch) {
@@ -98,14 +100,6 @@ const CreatePasswordForm = () => {
             setIsSubmitting(false);
         }
     };
-    // const strengthTextColor =
-    //     strength.label === "Very Strong" || strength.label === "Strong"
-    //         ? "text-green-600"
-    //         : strength.label === "Medium"
-    //             ? "text-yellow-600"
-    //             : strength.label === "Weak"
-    //                 ? "text-orange-600"
-    //                 : "text-red-600";
 
     if (isSuccess) {
         return (
@@ -196,8 +190,8 @@ const CreatePasswordForm = () => {
                         }}
                         autoComplete="new-password"
                         required
-                        minLength={8}
-                        maxLength={128}
+                        minLength={PASSWORD_MIN_LENGTH}
+                        maxLength={PASSWORD_MAX_LENGTH}
                         autoCapitalize="none"
                         spellCheck={false}
                         aria-describedby="password-requirement"
@@ -216,35 +210,6 @@ const CreatePasswordForm = () => {
                     </button>
                 </div>
                 <PasswordStrengthIndicator password = {password} />
-                {/* {password.length > 0 && (
-                    <div className="flex w-full items-center justify-end gap-2">
-                        <div
-                            className="flex w-16 shrink-0 gap-0.5"
-                            role="progressbar"
-                            aria-valuemin={0}
-                            aria-valuemax={4}
-                            aria-valuenow={filledPieces}
-                            aria-label={`Password strength: ${strength.label}`}
-                        >
-                            {[1, 2, 3, 4].map((piece) => (
-                                <div
-                                    key={piece}
-                                    className={`h-1 flex-1 rounded-full transition-colors duration-300 ${piece <= filledPieces
-                                        ? strength.colorClass
-                                        : "bg-gray-300"
-                                        }`}
-                                />
-
-                            ))}
-                        </div>
-
-                        <span
-                            className={`shrink-0 whitespace-nowrap text-xs font-semibold ${strengthTextColor}`}
-                        >
-                            {strength.label}
-                        </span>
-                    </div>
-                )} */}
             </div>
 
             {/* Confirm password */}
@@ -320,7 +285,7 @@ const CreatePasswordForm = () => {
             {errorMessage && (
                 <p
                     role="alert"
-                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                    className="rounded-lg border text-center justify-center border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
                 >
                     {errorMessage}
                 </p>
@@ -342,46 +307,3 @@ const CreatePasswordForm = () => {
 };
 
 export default CreatePasswordForm;
-
-// type RequirementProps = {
-//     fulfilled: boolean;
-//     text: string;
-// };
-
-// const Requirement = ({ fulfilled, text }: RequirementProps) => {
-//     return (
-//         <li className="flex items-center gap-2 text-sm">
-//             <span
-//                 className={`flex h-4 w-4 items-center justify-center rounded-full ${fulfilled
-//                     ? "bg-green-100 text-green-600"
-//                     : "bg-gray-100 text-gray-400"
-//                     }`}
-//             >
-//                 {fulfilled && <FaCheck className="text-[9px]" />}
-//             </span>
-
-//             <span
-//                 className={
-//                     fulfilled ? "text-gray-700" : "text-gray-400"
-//                 }
-//             >
-//                 {text}
-//             </span>
-//         </li>
-//     );
-// };
-
-
-{/* Password requirements */ }
-{/* <div>
-                <p className="mb-3 text-sm font-medium text-gray-700">
-                    Password requirements
-                </p>
-
-                <ul id="password-requirement" className="space-y-2">
-                    <Requirement
-                        fulfilled={meetsMinimumLength}
-                        text="At least 8 characters000"
-                    />
-                </ul>
-            </div> */}
