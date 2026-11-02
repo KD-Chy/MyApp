@@ -4,11 +4,6 @@ import { useState } from "react";
 import type { SignupFormData, SignupErrors } from "@/types/auth";
 import { signup } from "@/services/authService"
 import { validateSignup } from "@/utils/validators";
-import {
-    disabledStyles,
-    focusLinkStyles,
-    focusButtonStyles,
-} from "@/styles/uiStyles";
 import TextInput from "../inputs/TextInput";
 import PasswordInput from "../inputs/PasswordInput";
 import Checkbox from '../inputs/Checkbox';
@@ -16,6 +11,11 @@ import GoogleButton from '../buttons/GoogleButton';
 import GitHubButton from '../buttons/GitHubButton';
 import MicrosoftButton from '../buttons/MicrosoftButton';
 import PasswordStrengthIndicator from "@/components/auth/PasswordStrengthIndicator";
+import {
+    disabledStyles,
+    focusLinkStyles,
+    focusButtonStyles,
+} from "@/styles/uiStyles";
 
 export default function SignupForm() {
     const [form, setForm] = useState<SignupFormData>({
@@ -82,8 +82,8 @@ export default function SignupForm() {
                 firstName: form.firstName.trim(),
                 lastName: form.lastName.trim(),
                 username: form.username.trim(),
-                password: form.password.trim(),
-                confirmPassword: form.confirmPassword.trim(),
+                password: form.password,
+                confirmPassword: form.confirmPassword,
                 acceptTerms: form.acceptTerms,
             };
             // Here you can add your logic to send the form data to your backend or API
@@ -94,7 +94,7 @@ export default function SignupForm() {
             // Developer/debug information
             console.error("Signup error:", error);
             if (error instanceof Error) {
-                setSignupError(error.message)
+                setSignupError(error.message);
             } else {
                 setSignupError(
                     "Something went wrong. Please try again."
@@ -120,13 +120,6 @@ export default function SignupForm() {
                         Join us by creating an account
                     </p>
                 </div>
-
-                {/* Display server error */}
-                {isSignupError && (
-                    <div className="mt-4 w-full rounded-md bg-red-100 px-3 py-2 text-sm text-red-700 justify-center wrap-break-word">
-                        {isSignupError}
-                    </div>
-                )}
 
                 {/* Form Fields */}
                 <div className="mt-4 space-y-6">
@@ -194,26 +187,30 @@ export default function SignupForm() {
                             {errorMessage.username}
                         </p>
                     )}
-                    <PasswordInput
-                        id="password"
-                        label={
-                            <>
-                                Password <span className="text-red-500">*</span>:
-                            </>
-                        }
-                        name="password"
-                        placeholder="Create a password"
-                        value={form.password}
-                        onChange={onChange}
-                        autoComplete="new-password"
-                        required
-                    />
-                    <PasswordStrengthIndicator password={form.password} />
-                    {errorMessage.password && (
-                        <p className="text-red-500 text-sm">
-                            {errorMessage.password}
-                        </p>
-                    )}
+                    <div
+                        className='space-y-1 '
+                    >
+                        <PasswordInput
+                            id="password"
+                            label={
+                                <>
+                                    Password <span className="text-red-500">*</span>:
+                                </>
+                            }
+                            name="password"
+                            placeholder="Create a password"
+                            value={form.password}
+                            onChange={onChange}
+                            autoComplete="new-password"
+                            required
+                        />
+                        <PasswordStrengthIndicator password={form.password} />
+                        {errorMessage.password && (
+                            <p className="text-red-500 text-sm">
+                                {errorMessage.password}
+                            </p>
+                        )}
+                    </div>
 
                     <div className='space-y-3'>
                         <PasswordInput
@@ -267,6 +264,14 @@ export default function SignupForm() {
                             </p>
                         )}
                     </div>
+
+                    {/* Display server error */}
+                    {isSignupError && (
+                        <div className="w-full bg-red-100 text-center text-sm text-red-700 wrap-break-word">
+                            {isSignupError}
+                        </div>
+                    )}
+                    
                     <button
                         type="submit" //type="submit" submits the form when clicked
                         disabled={loading}
@@ -293,7 +298,7 @@ export default function SignupForm() {
                         Already have an account?{" "}
                         <Link
                             to="/login" //type="button" prevents from submitting the form without login
-                            className={`ml-1 underline text-blue-600 hover:text-blue-800 font-medium ${focusLinkStyles} cursor-pointer`}
+                            className={`underline text-blue-600 hover:text-blue-800 font-medium ${focusLinkStyles} cursor-pointer`}
                         >
                             Sign in
                         </Link>
